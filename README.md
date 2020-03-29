@@ -22,8 +22,8 @@ Raspbian Buster comes preinstalled with the official Bluetooth protocol stack Bl
    - `sudo apt install bluealsa`
 2. Add pi to the bluetooth group
    - `sudo adduser pi bluetooth`
-3. Edit the [bluetooth.service](bluetooth.service) file
-   - `sudo nano /lib/systemd/system/bluetooth.service`
+3. Edit the bluetooth unit file
+   - Open the bluetooth.service for editing: `sudo nano /lib/systemd/system/bluetooth.service`
    - Add the option `--noplugin=sap` to the end of the ExecStart parameter and save the file.
 4. Restart Raspberry Pi
    - `sudo reboot`
@@ -47,9 +47,9 @@ Raspbian Buster comes preinstalled with the official Bluetooth protocol stack Bl
 The host operating system (Raspbian in this case) hosts a media player server that is capable to play sounds and music to various audio outputs including the bluetooth speaker.
 1. Install the mpd server
    - `sudo apt install mpd`
-2. Edit the mpd.conf file
-   - `sudo nano /etc/mpd.conf`
-   - Add the following audio output
+2. Configure the mpd.conf file
+   - Open the mpd.conf file for editing: `sudo nano /etc/mpd.conf`
+   - Add the following audio output:
      ```
      audio_output {
           type            "alsa"
@@ -75,7 +75,7 @@ The host operating system (Raspbian in this case) hosts a media player server th
 4. Update hosts file in Raspbian (optional)
    - This step is only needed if TSL is used in Hass.io and the router cannot route the traffic to the local host when using a public DuckDNS domain name.
    - Edit hosts: `sudo nano /etc/hosts'
-   - Add the text `127.0.0.1 xxx.duckdns.org` where xxx is the DuckDNS name used.
+   - Add the text `127.0.0.1 xxx.duckdns.org` where xxx is the DuckDNS name used
    - Save hosts file
 ## Setting up Hass.io
 Hass.io integrates an [mpd media player](https://www.home-assistant.io/integrations/mpd/) by default.
@@ -87,4 +87,10 @@ Hass.io integrates an [mpd media player](https://www.home-assistant.io/integrati
         host: 127.0.0.1
    ```
 2. Restart Home Assistant
-3. Update hosts file 
+3. Add a [Media Control Card](https://www.home-assistant.io/lovelace/media-control/) in Lovelace UI
+4. Send a TTS sound to mpd from the Media Control Card.
+
+## TODO list
+- [ ] Stream internet radio stations from Hass.io
+- [ ] Build a docker image with the above configuration
+

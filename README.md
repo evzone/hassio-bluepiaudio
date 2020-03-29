@@ -36,4 +36,8 @@ Raspbian Buster comes preinstalled with the official Bluetooth protocol stack Bl
    - Pair the device by using the address found: `pair 70:99:1C:88:B0:06`
    - Connect to the device: `connect 70:99:1C:88:B0:06`
    - Trust the device for automatic reconnection: `trust 70:99:1C:88:B0:06`
-   
+   - Turn off scanning: `scan off`
+   - Exit bluetoothctl: `quit`
+6. Test Bluetooth speaker with some audio
+   - Ensure the bluetooth speaker is connected as described above
+   - Use a WAV file for 

@@ -81,11 +81,11 @@ The host operating system (Raspbian in this case) hosts a media player server th
 Hass.io integrates an [mpd media player](https://www.home-assistant.io/integrations/mpd/) by default.
 1. Add the mpd integration 
    - Edit the configuration.yaml file and add the following text
-   ```
-   media_player:
-      - platform: mpd
-        host: 127.0.0.1
-   ```
+     ```
+     media_player:
+        - platform: mpd
+          host: 127.0.0.1
+     ```
 2. Restart Home Assistant
 3. Add a [Media Control Card](https://www.home-assistant.io/lovelace/media-control/) in Lovelace UI
 4. Send a TTS sound to mpd from the Media Control Card.

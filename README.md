@@ -44,4 +44,47 @@ Raspbian Buster comes preinstalled with the official Bluetooth protocol stack Bl
    - Play the sound to the bluetooth speaker: `aplay -D bluealsa:DEV=70:99:1C:88:B0:06 piano2.wav`
 
 ## Setting up the mpd server application
-
+The host operating system (Raspbian in this case) hosts a media player server that is capable to play sounds and music to various audio outputs including the bluetooth speaker.
+1. Install the mpd server
+   - `sudo apt install mpd`
+2. Edit the mpd.conf file
+   - `sudo nano /etc/mpd.conf`
+   - Add the following audio output
+     ```
+     audio_output {
+          type            "alsa"
+          name            "JBL GO"
+          device          "bluealsa:DEV=70:99:1C:88:B0:06,PROFILE=a2dp"
+          mixer_type      "software"
+          format          "44100:16:2"
+     }
+     ```
+   - Change the directories to your own needs. For example
+     ```
+     music_directory         "/home/pi/music"
+     playlist_directory      "/home/pi/playlists"
+     ```
+   - Restart the daemon: `sudo systemctl restart mpd`
+3. Test the media player server
+   - Ensure the bluetooth speaker is on and connected 
+   - Install a media player client: `sudo apt install mpc`
+   - Copy some sound files to the mpd music directory as defined in mpd.conf
+   - Add a sound file to the mpd queue: `mpc add piano2.wav`
+   - Update the mpd database: `mpc update`
+   - Play the sound file: `mpc play 1'
+4. Update hosts file in Raspbian (optional)
+   - This step is only needed if TSL is used in Hass.io and the router cannot route the traffic to the local host when using a public DuckDNS domain name.
+   - Edit hosts: `sudo nano /etc/hosts'
+   - Add the text `127.0.0.1 xxx.duckdns.org` where xxx is the DuckDNS name used.
+   - Save hosts file
+## Setting up Hass.io
+Hass.io integrates an [mpd media player](https://www.home-assistant.io/integrations/mpd/) by default.
+1. Add the mpd integration 
+   - Edit the configuration.yaml file and add the following text
+   ```
+   media_player:
+      - platform: mpd
+        host: 127.0.0.1
+   ```
+2. Restart Home Assistant
+3. Update hosts file 

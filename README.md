@@ -40,4 +40,8 @@ Raspbian Buster comes preinstalled with the official Bluetooth protocol stack Bl
    - Exit bluetoothctl: `quit`
 6. Test Bluetooth speaker with some audio
    - Ensure the bluetooth speaker is connected as described above
-   - Use a WAV file for 
+   - Copy the [WAV sound file](piano2.wav) to Raspbery Pi or use your own
+   - Play the sound to the bluetooth speaker: `aplay -D bluealsa:DEV=70:99:1C:88:B0:06 piano2.wav`
+
+## Setting up the mpd server application
+
